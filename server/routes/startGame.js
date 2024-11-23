@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 
 router.get("/", (req, res) => {
     const gameId = uuidv4();
+    console.log(gameId);
     const gameController = req.app.locals.gameController;
     gameController.startNewGame(gameId);
     const gameState = gameController.differentGames.get(gameId);

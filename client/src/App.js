@@ -1,54 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import HomeScreen from './homeScreen';
+import GameScreen from './gameScreen';
 
 const App = () => {
-  const [board, setBoard] = useState(Array(10).fill(null).map(() => Array(10).fill('')));
-  const [shots, setShots] = useState(25);
-  const [gameId, setGameId] = useState(null);
-
-  useEffect(() => {
-    axios.get('http://localhost:9000/startGame')
-      .then((response) => {  if (response && response.data) {setGameId(response.data.gameId)}})
-      .then((response) => {  if (response && response.data) {setShots(response.data.shotsRemaining)}});
-  }, []);
-
-  const handleGuess = (row, col) => {
-    axios.post('http://localhost:9000/guessLocation', { gameId, row, col })
-      .then((response) => {
-        {if (response && response.data){
-          const updatedBoard = [...board];
-          updatedBoard[row][col] = response.data.result === 'miss' ? 'O' : 'X';
-          setBoard(updatedBoard);
-          setShots(response.data.shotsRemaining);
-        }}
-      })
-      .catch((error) => alert(error.response.data.error));
-  };
+  const navigate = useNavigate();
 
   return (
-    <div>
-      <h1>Battleship Game</h1>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(10, 30px)' }}>
-        {board.map((row, rIndex) => 
-          row.map((cell, cIndex) => (
-            <div 
-              key={`${rIndex}-${cIndex}`} 
-              onClick={() => handleGuess(rIndex, cIndex)}
-              style={{
-                width: 30, height: 30, border: '1px solid black',
-                backgroundColor: cell === 'X' ? 'green' : cell === 'O' ? 'red' : 'white'
-              }}
-            />
-          ))
-        )}
-      </div>
-      <h2>Shots Remaining: {shots}</h2>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomeScreen onStart={() => navigate("/game")} />} />
+      <Route path="/game" element={<GameScreen />} />
+    </Routes>
   );
 };
 
 export default App;
 
-///TODO: Reikia sukurt atskira start game langa. Atvaizduot laukelius pataike, nuskandino ar nepataike, zaidimas laimetas ar pralaimetas. Jei nuskandino laiva,
-/// nudazo visa nuskandinta laiva juodai.(Reikes kad serveris grazintu unikalius laivu id).
-///Pritaikyt restart mygtuka.
+
+///TODO: Sutvarkyti UI home ir game ekranu. 
+/// Baigti zaidima kai jis laimimas ar pralaimimas.
+//// Jei nuskandino laiva, nudazo visa nuskandinta laiva juodai.(Reikes kad serveris grazintu unikalius laivu id). Nera geros atskirties tarp hit ir sunk.
+
