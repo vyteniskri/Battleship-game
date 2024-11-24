@@ -29,12 +29,12 @@ router.post("/", (req, res) =>{
         return res.json({ result: 'miss', shotsRemaining: gameState.shotsRemaining });
     } 
     else {
-        const hitShip = board[row][col];
+        const hitShipId = board[row][col];
         board[row][col] = 'X'; 
-        const sunk = !board.flat().includes(hitShip); /// TODO: Reikia pakeisti Id kiekvieno laivo, kad butu unikalus!
+        const sunk = !board.flat().includes(hitShipId);
 
-        const allSunk = gameState.ships.every((shipSize) => {
-            return !board.flat().includes(shipSize); 
+        const allSunk = gameState.ships.every((ship) => {
+            return !board.flat().includes(ship.id); 
         });
 
         if (allSunk) {

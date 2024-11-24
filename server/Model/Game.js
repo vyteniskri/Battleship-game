@@ -1,6 +1,17 @@
 class Game {
     constructor() {
-        this.ships = [5, 4, 3, 3, 2, 2, 2, 1, 1, 1];
+        this.ships = [
+            { id: 1, size: 5 },
+            { id: 2, size: 4 },
+            { id: 3, size: 3 },
+            { id: 4, size: 3 },
+            { id: 5, size: 2 },
+            { id: 6, size: 2 },
+            { id: 7, size: 2 },
+            { id: 8, size: 1 },
+            { id: 9, size: 1 },
+            { id: 10, size: 1 }
+        ];
         this.shotsRemaining = 25;
         this.board = this.createGameBoard();
     }
@@ -12,7 +23,8 @@ class Game {
         
     }
 
-    placeShip(board, size) {
+    placeShip(board, ship) {
+        const { id, size } = ship;
         let placed = false;
         while (!placed) {
             const isVertical = Math.random() > 0.5;
@@ -33,7 +45,7 @@ class Game {
                 for (let i = 0; i < size; i++) {
                     const row = startRow + (isVertical ? i : 0);
                     const col = startCol + (isVertical ? 0 : i);
-                    board[row][col] = size; // Mark the ship on the board
+                    board[row][col] = id;
                 }
                 placed = true;
               }
