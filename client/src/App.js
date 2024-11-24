@@ -18,6 +18,5 @@ export default App;
 
 
 ///TODO: Sutvarkyti UI home ir game ekranu. 
-/// Baigti zaidima kai jis laimimas ar pralaimimas.
-//// Jei nuskandino laiva, nudazo visa nuskandinta laiva juodai.(Reikes kad serveris grazintu unikalius laivu id). Nera geros atskirties tarp hit ir sunk.
+
 
