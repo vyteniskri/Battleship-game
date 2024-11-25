@@ -1,0 +1,45 @@
+
+.home-container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    
+}
+
+.home-background {
+    background-image: url('https://static.vecteezy.com/system/resources/previews/030/683/263/large_2x/battleship-2d-cartoon-illustraton-on-white-background-high-free-photo.jpg'); 
+    background-size: 800px 800px;
+    background-repeat: no-repeat;
+    background-position: center 200px;
+    width: 100vw;
+    height: 90vh;
+}
+
+
+.home-title {
+    font-size: 60px;
+    color: #0e0d0d;
+    margin-bottom: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+.home-button {
+    padding: 10px 20px;
+    margin-top: 25px;
+    font-size: 18px;
+    font-weight: bold; 
+    background-color: #7fbdd3;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: #0056b3;
+}
+
+.home-button:active {
+    background-color: #003f7f;
+}

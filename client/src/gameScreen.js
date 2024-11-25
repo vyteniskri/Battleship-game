@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './gameScreen.css';
 
 const GameScreen = () => {
     const [board, setBoard] = useState(Array(10).fill(null).map(() => Array(10).fill('')));
@@ -32,10 +33,10 @@ const GameScreen = () => {
                     updatedBoard[row][col] = response.data.result === 'miss' ? 'O' : 'X';
 
                     if (response.data.result === 'miss') {
-                        setMessage("You missed");
+                        setMessage("Miss");
                     } 
                     else if (response.data.result === 'hit') {
-                        setMessage("You hit a ship");
+                        setMessage("Hit");
                     } 
                     else if (response.data.result === 'sunk') {
                         setMessage("You sunk a ship");
@@ -81,45 +82,63 @@ const GameScreen = () => {
     };
     
     return (
-        <div>
+        <div className="game-container">
             {message === "Invalid game ID" ? (
-                <div style={{ textAlign: 'center' }}>
-                    <h1>{message}</h1>
+                <div className='end-game-container'>
+                    <div className='message'>{message}</div>
                 </div>
             ) : gameEnd ? (
-                    <div style={{ textAlign: 'center' }}>
-                    <h1>{gameEnd}</h1>
-                    <button onClick={handleRestart}>Restart Game</button>
-                    <button onClick={() => navigate("/")}>To Home Screen</button>
-                </div>
-            ) : ( 
-                <>
-                    <button onClick={() => navigate("/")}>To Home Screen</button>
-                    <button onClick={handleRestart}>Restart Game</button>
-                    <h1>Battleship Game</h1>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(10, 30px)' }}>
-                        {board.map((row, rIndex) =>
-                            row.map((cell, cIndex) => (
-                                <div
-                                    key={`${rIndex}-${cIndex}`}
-                                    onClick={() => handleGuess(rIndex, cIndex)}
-                                    style={{
-                                        width: 30,
-                                        height: 30,
-                                        border: '1px solid black',
-                                        backgroundColor: cell === 'X' ? 'green' : cell === 'O' ? 'red' : cell === 'B' ? 'black' : 'white',
-                                    }}
-                                />
-                            ))
-                        )}
+                <div className='end-game-container'>
+                    <div className='message'>{gameEnd}</div>
+                    <div className='end-game-buttons'>
+                        <button onClick={handleRestart}>Restart Game</button>
+                        <button onClick={() => navigate("/")}>To Home Screen</button>
                     </div>
-                    <h2>Shots Remaining: {shots}</h2>
-                    <h2>{message}</h2>
-                </>
-            )};
+                </div>
+            ) : (
+                <>
+                    <div className="button-container">
+                        <button onClick={() => navigate("/")}>To Home Screen</button>
+                        <button onClick={handleRestart}>Restart Game</button>
+                    </div>
+                    <div className="game-board-container">
+                        <div  className='rules-container'> 
+                            <p>Game rules:</p> <p>You need to destroy all enemy ships to win.</p> 
+                            <p>There are: </p>
+                            <ul>
+                                <li>3 ships of size 1</li>
+                                <li>3 ships of size 2</li>
+                                <li>2 ships of size 3</li>
+                                <li>1 ship of size 4</li>
+                                <li>1 ship of size 5</li>
+                            </ul>
 
+                            <p>Good luck!</p>
+                        </div>
+                        <div className="game-board">
+                            {board.map((row, rIndex) =>
+                                row.map((cell, cIndex) => (
+                                    <div
+                                        key={`${rIndex}-${cIndex}`}
+                                        onClick={() => handleGuess(rIndex, cIndex)}
+                                        className="board-cell"
+                                        style={{
+                                            backgroundColor: cell === 'X' ? 'green' : cell === 'O' ? 'red' : cell === 'B' ? 'black' : 'white',
+                                        }}
+                                    />
+                                ))
+                            )}
+                        </div>
+                        <div className="shots-container">
+                            <div>Shots Remaining: <b>{shots}</b></div>
+                        </div>
+                    </div>
+                    <div className="message">{message}</div>
+                </>
+            )}
         </div>
     );
+    
 };
 
 export default GameScreen;
