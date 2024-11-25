@@ -1,0 +1,117 @@
+* {
+    box-sizing: border-box;
+}
+
+.game-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a7/Atlantic_near_Faroe_Islands.jpg'); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;  
+}
+
+.game-board-container {
+    display: flex; 
+    justify-content: center; 
+    margin: 20px 170px 0px 0px;
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: center; 
+    gap: 280px; 
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(10, 60px);
+    gap: 5px;
+    border: 5px solid black;
+    padding: 5px; 
+}
+
+.board-cell {
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.shots-container {
+    margin-top: auto; 
+    margin-left: 20px;  
+    text-decoration: underline;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #f1e4e4;
+    font-size: 25px;
+}
+
+.message {
+    margin-top: 40px;
+    font-size: 40px;
+    min-height: 50px;
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    color: #f1e4e4;
+}
+
+.end-game-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    justify-content: center; 
+    height: 80vh;  
+}
+
+.end-game-buttons {
+    display: flex;
+    justify-content: center; 
+    padding: 30px;
+    gap: 20px; 
+}
+
+.rules-container {
+    margin-right: 20px;
+    margin-top: auto; 
+    border: 5px solid red;
+    padding: 5px;
+    
+    background-color: rgb(255, 255, 255);
+}
+
+p {
+    color: #000000;
+    font-size: 22px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+li {
+    color: #ff0000;
+    font-size: 22px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 20px;
+    background-color: #7fbdd3;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold; 
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
