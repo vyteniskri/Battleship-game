@@ -52,7 +52,13 @@ const GameScreen = () => {
                 }
                 
             })
-            .catch((error) => setMessage(error.response.data.error));
+            .catch((error) => {
+                if (!error.response) {
+                    setMessage("Game is currently unavailable. Please try again later.");
+                } else {
+                    setMessage(error.response.data.error);
+                }
+            });
     };
 
     const handleShipSunkR = (row, col) => {
@@ -78,12 +84,22 @@ const GameScreen = () => {
                 setGameEnd(null);
                 setMessage(null);
             })
-            .catch((error) => alert(error.response.data.error));
+            .catch((error) => {
+                if (!error.response) {
+                    setMessage("Game is currently unavailable. Please try again later.");
+                } else {
+                    setMessage(error.response.data.error || "An error occurred. Please try again.");
+                }
+            });
     };
     
     return (
         <div className="game-container">
             {message === "Invalid game ID" ? (
+                <div className='end-game-container'>
+                    <div className='message'>Please reload the game</div>
+                </div>
+            ) : message === 'Game is currently unavailable. Please try again later.' ? (
                 <div className='end-game-container'>
                     <div className='message'>{message}</div>
                 </div>
@@ -91,26 +107,27 @@ const GameScreen = () => {
                 <div className='end-game-container'>
                     <div className='message'>{gameEnd}</div>
                     <div className='end-game-buttons'>
-                        <button onClick={handleRestart}>Restart Game</button>
-                        <button onClick={() => navigate("/")}>To Home Screen</button>
+                        <button className='button' onClick={handleRestart}>Restart Game</button>
+                        <button className='button' onClick={() => navigate("/")}>To Home Screen</button>
                     </div>
                 </div>
             ) : (
                 <>
                     <div className="button-container">
-                        <button onClick={() => navigate("/")}>To Home Screen</button>
-                        <button onClick={handleRestart}>Restart Game</button>
+                        <button  onClick={() => navigate("/")}>To Home Screen</button>
+                        <button  onClick={handleRestart}>Restart Game</button>
                     </div>
                     <div className="game-board-container">
                         <div  className='rules-container'> 
-                            <p>Game rules:</p> <p>You need to destroy all enemy ships to win.</p> 
+                            <p>Game rules:</p> 
+                            <p>You need to destroy all enemy ships to win.</p> 
                             <p>There are: </p>
                             <ul>
-                                <li>3 ships of size 1</li>
-                                <li>3 ships of size 2</li>
-                                <li>2 ships of size 3</li>
-                                <li>1 ship of size 4</li>
-                                <li>1 ship of size 5</li>
+                                <li>3 ships of size: (◼️)</li>
+                                <li>3 ships of size: (◼️◼️)</li>
+                                <li>2 ships of size: (◼️◼️◼️)</li>
+                                <li>1 ship of size: &nbsp;(◼️◼️◼️◼️)</li>
+                                <li>1 ship of size: &nbsp;(◼️◼️◼️◼️◼️)</li>
                             </ul>
 
                             <p>Good luck!</p>
@@ -130,7 +147,7 @@ const GameScreen = () => {
                             )}
                         </div>
                         <div className="shots-container">
-                            <div>Shots Remaining: <b>{shots}</b></div>
+                            <div>Shots Remaining: <b style={{fontSize: '2vw'}}>{shots}</b></div>
                         </div>
                     </div>
                     <div className="message">{message}</div>
