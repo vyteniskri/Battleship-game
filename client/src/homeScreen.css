@@ -1,37 +1,35 @@
 
 .home-container {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    
-}
-
-.home-background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
     background-image: url('https://static.vecteezy.com/system/resources/previews/030/683/263/large_2x/battleship-2d-cartoon-illustraton-on-white-background-high-free-photo.jpg'); 
-    background-size: 800px 800px;
+    background-size: 43%;
     background-repeat: no-repeat;
-    background-position: center 200px;
-    width: 100vw;
-    height: 90vh;
+    background-position: center 10.5vw;
+    width: 100vw; 
+    height: 100vh; 
 }
 
 
 .home-title {
-    font-size: 60px;
+    font-size: 3.2vw;
     color: #0e0d0d;
-    margin-bottom: 20px;
+    margin-bottom: 1vw;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 }
 
 .home-button {
-    padding: 10px 20px;
-    margin-top: 25px;
-    font-size: 18px;
+    padding: 0.56vw 1.2vw;
+    margin-top: 1.3vw;
+    font-size: 1vw;
     font-weight: bold; 
     background-color: #7fbdd3;
     color: #ffffff;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.2vw;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }

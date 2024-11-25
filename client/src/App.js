@@ -17,6 +17,4 @@ const App = () => {
 export default App;
 
 
-///TODO: Sutvarkyti UI home ir game ekranu. 
-
 
